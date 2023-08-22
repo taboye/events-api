@@ -1,0 +1,44 @@
+package org.launchcode.Spring.REST.API.Controllers;
+
+import org.launchcode.Spring.REST.API.Models.Event;
+import org.launchcode.Spring.REST.API.Models.EventDto;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping(value = "/events")
+public class EventController {
+
+    @GetMapping
+    public List<Event> getEvents() {
+        return Event.findAllItems();
+    }
+
+    @GetMapping(value = "/{id}")
+    public Event getEventById(@PathVariable int id) {
+        return Event.findItem(id);
+    }
+
+    @PostMapping
+    public Event postEvent(@RequestBody EventDto eventDto) {
+        return Event.createEvent(eventDto.getText());
+    }
+
+    @PatchMapping(value = "/{id}")
+    public Event patchEvent(@PathVariable int id) {
+        Event theEvent = Event.findItem(id);
+        return theEvent;
+    }
+
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity deleteEvent(@PathVariable int id) {
+        boolean deleted = Event.deleteItem(id);
+        if (deleted) {
+            return new ResponseEntity(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
+    }
+}
