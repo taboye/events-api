@@ -1,19 +1,24 @@
 package org.launchcode.Spring.REST.API.Models;
 
 public class EventDto {
-
-    private String text;
-
+    private String name;
+    private String description;
     public EventDto() {}
-
-    public EventDto(String text) {
-        this.text = text;
+    public EventDto(String name, String description) {
+        this.name = name;
+        this.description = description;
     }
-    public String getText() {
-        return this.text;
+    public void setDescription(String description) {
+        this.description = description;
     }
-    public void setText(String text) {
-        this.text = text;
+    public String getDescription() {
+        return description;
+    }
+    public String getName() {
+        return this.name;
+    }
+    public void setName(String name) {
+        this.name = name;
     }
 
 }

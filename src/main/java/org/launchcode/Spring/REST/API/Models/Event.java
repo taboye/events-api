@@ -6,49 +6,52 @@ import java.util.List;
 
 interface IEvent {
     int getId();
-    String getText();
+    String getName();
+    String getDescription();
 }
 public class Event implements IEvent {
-
     private static int nextId = 0;
-
     private static HashMap<Integer, Event> store = new HashMap();
-
     private int id;
-    private String text;
-
-    public static int getNextId() {
-        return nextId;
+    private String name;
+    private String description;
+    public void setDescription(String description) {
+        this.description = description;
     }
-
-    public static HashMap<Integer, Event> getStore() {
-        return store;
+    @Override
+    public String getDescription() {
+        return description;
     }
-
+    public void setName(String name) {
+        this.name = name;
+    }
+    @Override
+    public String getName() {
+        return this.name;
+    }
     @Override
     public int getId() {
         return this.id;
     }
-
-    @Override
-    public String getText() {
-        return this.text;
+    public static int getNextId() {
+        return nextId;
     }
-
-    private Event(int id, String text) {
+    public static HashMap<Integer, Event> getStore() {
+        return store;
+    }
+    private Event(int id, String name, String description) {
         this.id = id;
-        this.text = text;
+        this.name = name;
+        this.description = description;
     }
-
-    public static Event createEvent(String text) {
+    public static Event createEvent(String name, String description) {
         int id = ++nextId;
-        Event event = new Event(id, text);
+        Event event = new Event(id, name, description);
 
         store.put(id, event);
 
         return event;
     }
-
     public static Event findItem(int id) {
         for(int eventId : store.keySet()) {
             if(id == eventId) {
@@ -57,11 +60,9 @@ public class Event implements IEvent {
         }
         return null;
     }
-
     public static List<Event> findAllItems() {
         return new ArrayList<Event>(store.values());
     }
-
     public static boolean deleteItem(int id) {
         for(int eventId : store.keySet()) {
             if(id == eventId) {

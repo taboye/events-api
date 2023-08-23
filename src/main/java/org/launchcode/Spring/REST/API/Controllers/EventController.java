@@ -16,23 +16,27 @@ public class EventController {
     public List<Event> getEvents() {
         return Event.findAllItems();
     }
-
     @GetMapping(value = "/{id}")
     public Event getEventById(@PathVariable int id) {
         return Event.findItem(id);
     }
-
     @PostMapping
     public Event postEvent(@RequestBody EventDto eventDto) {
-        return Event.createEvent(eventDto.getText());
+        return Event.createEvent(eventDto.getName(), eventDto.getDescription());
     }
-
     @PatchMapping(value = "/{id}")
-    public Event patchEvent(@PathVariable int id) {
+    public Event patchEvent(@PathVariable int id, @RequestBody EventDto eventDto) {
         Event theEvent = Event.findItem(id);
+        if (theEvent != null) {
+            if (eventDto.getName() != null) {
+                theEvent.setName(eventDto.getName());
+            }
+            if (eventDto.getDescription() != null) {
+                theEvent.setDescription(eventDto.getDescription());
+            }
+        }
         return theEvent;
     }
-
     @DeleteMapping(value = "/{id}")
     public ResponseEntity deleteEvent(@PathVariable int id) {
         boolean deleted = Event.deleteItem(id);
