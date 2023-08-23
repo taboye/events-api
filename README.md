@@ -2,7 +2,7 @@ This application is an basic api example using java/spring for Chapter 20: Web A
 
 You can also view the swagger docs once the application is running at this endpoint: http://localhost:8080/swagger-ui/index.html
 
-Once the application is running on your machine you can test the application with some of the following commands. Please note the following sectionscommands assume that you are able to run curl requests from your terminal::
+Once the application is running on your machine you can test the application with some of the following commands. Please note the following commands assume that you are able to run curl requests from your terminal::
 
 ## GET all events:
 curl localhost:8080/events
