@@ -11,7 +11,7 @@ curl localhost:8080/events
 curl localhost:8080/events/{id}
 
 ## POST a new event:
-curl -X POST localhost:8080/events -H Content-Type:application/json -d '{"text":"the first event", "description":"WWDC"}'
+curl -X POST localhost:8080/events -H Content-Type:application/json -d '{"name":"the first event", "description":"WWDC"}'
 
 ## PATCH to update an event:
 curl -X PATCH localhost:8080/events/1 -H 'Content-Type:application/json' -d '{"text":"the first event name has been modified", "description":"and the description has been changed"}'
